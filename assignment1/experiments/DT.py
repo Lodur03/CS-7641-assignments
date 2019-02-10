@@ -11,7 +11,7 @@ class DTExperiment(experiments.BaseExperiment):
 
     def perform(self):
         # TODO: Clean up the older alpha stuff?
-        max_depths = np.arange(1, 51, 1)
+        max_depths = [1, 2, 3, 5, 10, 20, 50, 100]
         params = {'DT__criterion': ['gini', 'entropy'], 'DT__max_depth': max_depths,
                   'DT__class_weight': ['balanced', None]}  # , 'DT__max_leaf_nodes': max_leaf_nodes}
         complexity_param = {'name': 'DT__max_depth', 'display_name': 'Max Depth', 'values': max_depths}

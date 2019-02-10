@@ -12,12 +12,12 @@ class ANNExperiment(experiments.BaseExperiment):
     def perform(self):
         # Adapted from https://github.com/JonathanTay/CS-7641-assignment-1/blob/master/ANN.py
         # Search for good alphas
-        alphas = [10 ** -x for x in np.arange(-1, 9.01, 0.5)]
+        alphas = [3, 1, 0.5, 0.25, 0.10, 0.005, 0.001]
 
         # TODO: Allow for better tuning of hidden layers based on dataset provided
         d = self._details.ds.features.shape[1]
-        hiddens = [(h,) * l for l in [1, 2, 3] for h in [d, d // 2, d * 2]]
-        learning_rates = sorted([(2**x)/1000 for x in range(8)]+[0.000001])
+        hiddens = [(2,2), (4,4), (8,8), (16,16), (32,32), (64,64), (128,128)]
+        learning_rates = [0.000001, 0.0001, 0.001, 0.01, 0.1, 0.5]
 
         params = {'MLP__activation': ['relu', 'logistic'], 'MLP__alpha': alphas,
                   'MLP__learning_rate_init': learning_rates,
@@ -26,9 +26,7 @@ class ANNExperiment(experiments.BaseExperiment):
         timing_params = {'MLP__early_stopping': False}
         iteration_details = {
             'x_scale': 'log',
-            'params': {'MLP__max_iter':
-                            [2 ** x for x in range(12)] + [2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,
-                                                           3000]},
+            'params': {'MLP__max_iter': [1000, 2500, 5000, 10000, 30000]},
             'pipe_params': timing_params
         }
         complexity_param = {'name': 'MLP__alpha', 'display_name': 'Alpha', 'x_scale': 'log',

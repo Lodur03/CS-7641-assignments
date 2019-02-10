@@ -17,9 +17,9 @@ class SVMExperiment(experiments.BaseExperiment):
         samples = self._details.ds.features.shape[0]
         features = self._details.ds.features.shape[1]
 
-        gamma_fracs = np.arange(1/features, 2.1, 0.2)
-        tols = np.arange(1e-8, 1e-1, 0.01)
-        C_values = np.arange(0.001, 2.5, 0.25)
+        gamma_fracs = np.arange(1/features, 2.1, 0.4)
+        tols = [0.0008, 0.008, 0.08, 0.8]
+        C_values = [0.001, 0.01, 0.05, 0.1, 0.5, 1, 2]
         iters = [-1, int((1e6/samples)/.8)+1]
 
         best_params_linear = None
@@ -41,11 +41,11 @@ class SVMExperiment(experiments.BaseExperiment):
         # Linear SVM
         params = {'SVM__max_iter': iters, 'SVM__tol': tols, 'SVM__class_weight': ['balanced'],
                   'SVM__C': C_values}
-        complexity_param = {'name': 'SVM__C', 'display_name': 'Penalty', 'values': np.arange(0.001, 2.5, 0.1)}
+        complexity_param = {'name': 'SVM__C', 'display_name': 'Penalty', 'values': [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 2]}
 
         iteration_details = {
             'x_scale': 'log',
-            'params': {'SVM__max_iter': [2**x for x in range(12)]},
+            'params': {'SVM__max_iter': [1, 8, 16, 64, 256, 2048]},
         }
 
         # NOTE: If this is causing issues, try the RBFSVMLearner. Passing use_linear=True will use a linear kernel
@@ -76,7 +76,7 @@ class SVMExperiment(experiments.BaseExperiment):
         params = {'SVM__max_iter': iters, 'SVM__tol': tols, 'SVM__class_weight': ['balanced'],
                   'SVM__C': C_values,
                   'SVM__decision_function_shape': ['ovo', 'ovr'], 'SVM__gamma': gamma_fracs}
-        complexity_param = {'name': 'SVM__C', 'display_name': 'Penalty', 'values': np.arange(0.001, 2.5, 0.1)}
+        complexity_param = {'name': 'SVM__C', 'display_name': 'Penalty', 'values': [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 2]}
 
         learner = learners.SVMLearner(kernel='rbf')
         if best_params_rbf is not None:

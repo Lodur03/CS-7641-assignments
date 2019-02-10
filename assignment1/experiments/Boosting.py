@@ -26,11 +26,11 @@ class BoostingExperiment(experiments.BaseExperiment):
         of_booster = learners.BoostingLearner(algorithm='SAMME', learning_rate=1, base_estimator=of_base,
                                               random_state=self._details.seed)
 
-        params = {'Boost__n_estimators': [1, 2, 5, 10, 20, 30, 45, 60, 80, 90, 100],
-                  'Boost__learning_rate': [(2**x)/100 for x in range(7)]+[1],
+        params = {'Boost__n_estimators': [1, 5, 10, 20, 50, 100, 200, 500],
+                  'Boost__learning_rate': [0.01, 0.1, 0.25, 0.6, 1],
                   'Boost__base_estimator__max_depth': max_depths}
         iteration_details = {
-            'params': {'Boost__n_estimators': [1, 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+            'params': {'Boost__n_estimators': [1, 5, 10, 20, 50, 100, 200, 500]}
         }
         of_params = {'Boost__base_estimator__max_depth': None}
         complexity_param = {'name': 'Boost__learning_rate', 'display_name': 'Learning rate', 'x_scale': 'log',
