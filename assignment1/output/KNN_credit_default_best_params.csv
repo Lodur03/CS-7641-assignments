@@ -1,0 +1,2 @@
+algorithm,leaf_size,metric,metric_params,n_jobs,n_neighbors,p,weights
+auto,30,chebyshev,,-1,5,2,uniform

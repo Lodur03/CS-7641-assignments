@@ -1,0 +1,2 @@
+param_MLP__max_iter,train acc,test acc
+5000,0.9788789237668161,0.9296706063568233
