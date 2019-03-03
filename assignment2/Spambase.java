@@ -17,6 +17,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 public class Spambase {
 /*preprocess the data follow the convention*/
+	
+// Credits: https://github.com/XiaohuaCao/Randomized-Optimization
+	
 // TDDO: The dataset filename. Expected format is CSV
 private static final String FILENAME = "/media/wd/Data/Xiaohua/ABAGAILEclipse/Spambase.csv";
 	
