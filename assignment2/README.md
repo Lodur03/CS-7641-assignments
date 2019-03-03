@@ -13,8 +13,14 @@ be run. The data can be generated via
 ```
 python run_experiment.py --dump_data
 ```
- 
-Be sure to run this before running any of the experiments.
+Additionally, run:
+
+```
+java -cp ABAGAIL.jar Spambase.java
+```
+
+in order to obtain additional analysis and plots that were used in the report.
+
 
 ## Output
 
